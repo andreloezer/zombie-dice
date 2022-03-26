@@ -6,6 +6,7 @@
 
 
 import os
+from collections import namedtuple
 
 
 # General settings
@@ -28,19 +29,12 @@ RUN = "passos"
 SHOTGUN = "tiros"
 
 
-# Dices sides
-DICE_TYPES = {
-    RED: (BRAIN, RUN, RUN, SHOTGUN, SHOTGUN, SHOTGUN),
-    YELLOW: (BRAIN, BRAIN, RUN, RUN, SHOTGUN, SHOTGUN),
-    GREEN: (BRAIN, BRAIN, BRAIN, RUN, RUN, SHOTGUN)
-}
-
-
-# Dices amount
+# Dices configuration
+DiceType = namedtuple("DiceType", ("sides", "amount"))
 DICES = {
-    RED: 3,
-    YELLOW: 4,
-    GREEN: 6
+    RED: DiceType((BRAIN, RUN, RUN, SHOTGUN, SHOTGUN, SHOTGUN), 3),
+    YELLOW: DiceType((BRAIN, BRAIN, RUN, RUN, SHOTGUN, SHOTGUN), 4),
+    GREEN: DiceType((BRAIN, BRAIN, BRAIN, RUN, RUN, SHOTGUN), 6),
 }
 
 

@@ -6,7 +6,7 @@
 
 
 from style import BOLD, UND, style_text as style
-from config import RED, GREEN, BRAIN, SHOTGUN, SHOTS_LIMIT, DICES, DICE_TYPES, SCORE_LIMIT, DICES_PER_ROUND, RUN,\
+from config import RED, GREEN, BRAIN, SHOTGUN, SHOTS_LIMIT, DICES, SCORE_LIMIT, DICES_PER_ROUND, RUN,\
                    TERMINAL_WIDTH, MAX_PLAYERS, MIN_PLAYERS
 from math import floor
 
@@ -31,12 +31,12 @@ class GameStrings:
                 f"{'=' * TERMINAL_WIDTH}\n"
                 f"\nO {style('Zombie Dice', BOLD)} é um jogo de dados onde o jogador é um zumbi que precisa comer "
                 f"{style(BRAIN.capitalize(), BOLD)} para vencer!\n\n"
-                f"O jogo possui {style(sum(DICES.values()), BOLD, UND)} dados, "
+                f"O jogo possui {style(sum([dice.amount for dice in DICES.values()]), BOLD, UND)} dados, "
                 f"sendo que cada um representa uma vítima.\n"
                 f"Existem {style(len(DICES), BOLD, UND)} tipos de dados, cada um com um nível de dificuldade:\n")
-        for dice_type in DICE_TYPES:
+        for dice_type in DICES:
             text += f"\n{INDENT}{style(dice_type.capitalize(), BOLD, dice_type) + ':':26}"
-            for side in DICE_TYPES[dice_type]:
+            for side in DICES[dice_type].sides:
                 text += f" {style(side.capitalize(), BOLD):18}"
         text += (
             f"\n\nGanha o jogo quem conseguir comer "
@@ -64,7 +64,7 @@ class GameStrings:
             text += f"\n{INDENT}{dice}"
 
         text += "\n\nO pote contém os seguintes tipos de dados:"
-        for color in DICE_TYPES.keys():
+        for color in DICES.keys():
             amount = len([dice for dice in dices if dice.color == color])
             text += f"\n{INDENT}{style(color.capitalize(), BOLD, color) + ':':23} {style(amount, BOLD)}"
 

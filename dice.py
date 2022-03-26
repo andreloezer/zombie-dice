@@ -6,7 +6,7 @@
 
 
 from random import choice
-from config import DICE_TYPES
+from config import DICES
 from strings import DiceStrings as Strings
 
 
@@ -23,4 +23,4 @@ class Dice:
     # Roll dice
     def roll_dice(self):
         # Randomly choose a side
-        self.side = choice(DICE_TYPES[self.color])
+        self.side = choice(DICES[self.color].sides)

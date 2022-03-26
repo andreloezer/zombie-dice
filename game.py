@@ -42,7 +42,7 @@ class Game:
         self.dice_pool.clear()
         for dice_type in DICES:
             # Create dices of each color
-            for i in range(DICES[dice_type]):
+            for i in range(DICES[dice_type].amount):
                 dice = Dice(dice_type)
                 self.dice_pool.append(dice)
 

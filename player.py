@@ -69,7 +69,6 @@ class Player:
 
         # Show available dices in the pool
         self.game.display_dices()
-
         # Ask player to pick the dices
         input(Strings.ask_pick_dices(self.get_dices_amount))
 
@@ -129,7 +128,6 @@ class Player:
         print(Strings.enter_round(self.name, self.score, self.round_status[BRAIN]))
         # Get dices
         self.get_dices()
-
         # Roll dices in hand
         self.roll_dices()
 
@@ -140,7 +138,6 @@ class Player:
 
         # Calculate how many dices to get from the pool on the next round
         self.get_dices_amount = DICES_PER_ROUND - self.round_status[RUN]
-
         # Show player current round status
         self.print_stats()
 
