@@ -144,10 +144,10 @@ class PlayerStrings:
 
 # Strings for the Dice class
 class DiceStrings:
-    unknown_side = "???"
-
     @staticmethod
     def repr(color, value):
+        if not value:
+            return f"Dado: {style(color.capitalize(), color)}"
         return f"Dado: {style(color.capitalize(), color):20}Lado: {style(value.capitalize(), BOLD)}"
 
 

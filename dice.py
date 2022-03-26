@@ -18,8 +18,7 @@ class Dice:
 
     # Return all dice info
     def __repr__(self):
-        value = self.side if self.side else Strings.unknown_side
-        return Strings.repr(self.color, value)
+        return Strings.repr(self.color, self.side)
 
     # Roll dice
     def roll_dice(self):
