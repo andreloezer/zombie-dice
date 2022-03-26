@@ -46,6 +46,10 @@ class Game:
                 dice = Dice(dice_type)
                 self.dice_pool.append(dice)
 
+    # Show dices in the dice pool
+    def display_dices(self):
+        print(Strings.display_dices(self.dice_pool))
+
     # Setup game, players and dices
     def setup_game(self):
         # Greet user

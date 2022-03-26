@@ -66,6 +66,10 @@ class Player:
         # Skip if player already have sufficient dices in hand to roll
         if self.get_dices_amount == 0:
             return
+
+        # Show available dices in the pool
+        self.game.display_dices()
+
         # Ask player to pick the dices
         input(Strings.ask_pick_dices(self.get_dices_amount))
 

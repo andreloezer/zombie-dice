@@ -58,6 +58,19 @@ class GameStrings:
         return text
 
     @staticmethod
+    def display_dices(dices):
+        text = "\nDados disponíveis no pote:"
+        for dice in dices:
+            text += f"\n{INDENT}{dice}"
+
+        text += "\n\nO pote contém os seguintes tipos de dados:"
+        for color in DICE_TYPES.keys():
+            amount = len([dice for dice in dices if dice.color == color])
+            text += f"\n{INDENT}{style(color.capitalize(), BOLD, color) + ':':23} {style(amount, BOLD)}"
+
+        return text
+
+    @staticmethod
     def draw(players):
         text = "\nOs seguintes jogadores empataram:\n"
         for player in players:
