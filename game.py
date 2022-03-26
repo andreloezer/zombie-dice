@@ -5,7 +5,7 @@
 """
 
 
-from random import randint
+from random import randint, shuffle
 
 
 from dice import Dice
@@ -45,6 +45,7 @@ class Game:
             for i in range(DICES[dice_type]):
                 dice = Dice(dice_type)
                 self.dice_pool.append(dice)
+        shuffle(self.dice_pool)
 
     # Show dices in the dice pool
     def display_dices(self):
