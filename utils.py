@@ -52,7 +52,7 @@ def int_input(message, min_val, max_val):
             if response > max_val or response < min_val:
                 raise ValueError
         except ValueError:
-            print(Strings.int_warning)
+            print(Strings.int_warning(min_val, max_val))
         else:
             return response
 

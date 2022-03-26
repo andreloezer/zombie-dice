@@ -153,8 +153,11 @@ class DiceStrings:
 
 # Strings for the Utils functions
 class UtilsStrings:
-    int_warning = "Por favor entre com um número inteiro.\n"
     str_warning = "Por favor entre uma resposta válida.\n"
     truthy = ["s"]
     falsy = ["n"]
     bool_warning = "Resposta invalida, por favor escreva sim ou não."
+
+    @staticmethod
+    def int_warning(min_val, max_val):
+        return f"Por favor entre com um número inteiro entre {min_val} e {max_val}.\n"
