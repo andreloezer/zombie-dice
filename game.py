@@ -37,6 +37,14 @@ class Game:
     def take_dice(self):
         return self.dice_pool.pop(randint(0, (len(self.dice_pool) - 1)))
 
+    # Return dice to the pool
+    def return_dice(self, dice):
+        self.dice_pool.append(dice)
+
+    # Shuffle dices in the dice pool
+    def shuffle_dice_pool(self):
+        shuffle(self.dice_pool)
+
     # Create dices
     def create_dices(self):
         self.dice_pool.clear()
@@ -47,7 +55,7 @@ class Game:
                 self.dice_pool.append(dice)
 
         # Shuffle dices in dice pool
-        shuffle(self.dice_pool)
+        self.shuffle_dice_pool()
 
     # Show dices in the dice pool
     def display_dices(self):

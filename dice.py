@@ -24,3 +24,7 @@ class Dice:
     def roll_dice(self):
         # Randomly choose a side
         self.side = choice(DICES[self.color].sides)
+
+    # Reset dice side
+    def reset_side(self):
+        self.side = None

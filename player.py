@@ -31,6 +31,7 @@ class Player:
         }
         self.dices = 0
         self.hand_dices = []
+        self.table_dices = []
         self.get_dices_amount = DICES_PER_ROUND
         self.state = PlayerStates.GAME
 
@@ -44,6 +45,7 @@ class Player:
         hand_copy = self.hand_dices.copy()
         for dice in hand_copy:
             if not dice.side == RUN:
+                self.table_dices.append(dice)
                 self.hand_dices.remove(dice)
 
     # Return dices to pool
@@ -67,6 +69,8 @@ class Player:
         if self.get_dices_amount == 0:
             return
 
+        # Shuffle dices before picking
+        self.game.shuffle_dice_pool()
         # Show available dices in the pool
         self.game.display_dices()
         # Ask player to pick the dices
@@ -141,14 +145,19 @@ class Player:
         # Show player current round status
         self.print_stats()
 
-        if len(self.game.dice_pool) < self.get_dices_amount:
-            # Not enough dices to continue the player round
-            print(Strings.picked_all_dices)
-            self.state = PlayerStates.END
-            return
-
         # Ask if player wants to continue playing the round
         self.ask_continue()
+
+        if len(self.game.dice_pool) < self.get_dices_amount:
+            # Not enough dices to continue the player round
+            self.continue_playing()
+
+    def continue_playing(self):
+        print(Strings.picked_all_dices)
+        for dice in self.table_dices:
+            if dice.side == BRAIN:
+                dice.reset_side()
+                self.game.return_dice(dice)
 
     # Ask if the player wants to continue throwing more dices
     def ask_continue(self):

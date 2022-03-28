@@ -90,7 +90,8 @@ class GameStrings:
 class PlayerStrings:
     ask_throw_dices = "\nPressione ENTER para jogar os dados..."
     prompt_continue = "\nPressione ENTER para continuar..."
-    picked_all_dices = "Você já esvaziou o pote de dados. Seu turno será encerrado."
+    picked_all_dices = (f"Não há mais dados suficientes no tubo para mais uma rodada. Os dados que deram "
+                        f"{style(BRAIN, BOLD, UND)} serão re-colocados no tubo para continuar o seu turno.")
 
     @staticmethod
     def picked_dices(dices):
