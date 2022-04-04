@@ -23,7 +23,9 @@ class Player:
     :param name: Name of the player.
     """
 
-    # TODO: https://stackoverflow.com/questions/39740632/python-type-hinting-without-cyclic-imports/39757388#39757388
+    # Solution to avoid circular imports when adding type annotations:
+    # https://stackoverflow.com/questions/39740632/python-type-hinting-without-cyclic-imports/39757388#39757388
+    # https://peps.python.org/pep-0484/#forward-references
     def __init__(self, name: str, game_ref: "game.Game") -> None:
         """Init player.
 
