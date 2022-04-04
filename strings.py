@@ -1,7 +1,4 @@
-"""
-
-    All the text (and it's logics) printed or prompted to the user/player
-
+"""Text (and it's logics) printed or prompted to the user/player.
 """
 
 
@@ -19,6 +16,8 @@ INDENT = " " * 4
 
 # Strings for the Game class
 class GameStrings:
+    """Class to store all Game class related strings that interface with the user.
+    """
     ask_num_players = f"Quantas pessoas vão jogar? ({MIN_PLAYERS}, {MAX_PLAYERS}): "
     ask_name = "Nome do jogador: "
     end_game = "\nPressione ENTER para encerrar..."
@@ -88,6 +87,8 @@ class GameStrings:
 
 # Strings for the Player class
 class PlayerStrings:
+    """Class to store all Player class related strings to be printed that interface with the user.
+    """
     ask_throw_dices = "\nPressione ENTER para jogar os dados..."
     prompt_continue = "\nPressione ENTER para continuar..."
     picked_all_dices = (f"Não há mais dados suficientes no tubo para mais uma rodada. Os dados que deram "
@@ -145,6 +146,8 @@ class PlayerStrings:
 
 # Strings for the Dice class
 class DiceStrings:
+    """Class to store all Dice class related strings to be printed that interface with the user.
+    """
     @staticmethod
     def repr(color, value):
         if not value:
@@ -154,6 +157,8 @@ class DiceStrings:
 
 # Strings for the Utils functions
 class UtilsStrings:
+    """Class to store all the utils functions strings that interface with the user.
+    """
     str_warning = "Por favor entre uma resposta válida.\n"
     truthy = ["s"]
     falsy = ["n"]

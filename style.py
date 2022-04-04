@@ -1,7 +1,4 @@
-"""
-
-    All the logic to style strings in the terminal output
-
+"""Style strings in the terminal output.
 """
 
 
@@ -23,9 +20,14 @@ STYLE = {
 }
 
 
-# Style text with given styles
-def style_text(text, *styles):
-    # In case style is not compatible with current terminal
+def style_text(text: str or int, *styles: str) -> str:
+    """Apply styles to text.
+
+    :param text: Text to style.
+    :param styles: List of styles.
+    :return: Styled text.
+    """
+    # In case ANSI styles aren't compatible with the terminal
     if not USE_STYLES:
         return text
     output = ""

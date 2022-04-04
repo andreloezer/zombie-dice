@@ -16,6 +16,10 @@ Obs:
 """
 
 
+__author__ = "André César Loezer"
+__version__ = "1.0.0"
+
+
 from game import Game
 
 

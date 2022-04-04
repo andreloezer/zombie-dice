@@ -1,12 +1,8 @@
-"""
-
-    Game configurations, settings, and other constants
-
-"""
+"""Game configurations, settings, and other constants."""
 
 
 import os
-from collections import namedtuple
+from dataclasses import dataclass
 
 
 # General settings
@@ -29,9 +25,14 @@ RUN = "passos"
 SHOTGUN = "tiros"
 
 
+@dataclass
+class DiceType:
+    sides: tuple
+    amount: int
+
+
 # Dices configuration
-DiceType = namedtuple("DiceType", ("sides", "amount"))
-DICES = {
+DICES: dict[str, DiceType] = {
     RED: DiceType((BRAIN, RUN, RUN, SHOTGUN, SHOTGUN, SHOTGUN), 3),
     YELLOW: DiceType((BRAIN, BRAIN, RUN, RUN, SHOTGUN, SHOTGUN), 4),
     GREEN: DiceType((BRAIN, BRAIN, BRAIN, RUN, RUN, SHOTGUN), 6),

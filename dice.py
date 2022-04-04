@@ -1,30 +1,39 @@
-"""
-
-    All the dice logic
-
+"""Dice class.
 """
 
 
 from random import choice
+from typing import Union
+
 from config import DICES
 from strings import DiceStrings as Strings
 
 
 # All Dice related logic
 class Dice:
-    def __init__(self, color):
-        self.color = color
-        self.side = None
+    """Class to represent the dice.
+    """
 
-    # Return all dice info
-    def __repr__(self):
+    def __init__(self, color: str) -> None:
+        """Init dice instance. The dice start having no chosen side.
+
+        :param color: Color of the dice representing its difficult.
+        """
+        self.color = color
+        self.side: Union[str, None] = None
+
+    def __repr__(self) -> str:
+        """Return a string representing the dice in the game with its color and side.
+        """
         return Strings.repr(self.color, self.side)
 
-    # Roll dice
-    def roll_dice(self):
-        # Randomly choose a side
+    def roll_dice(self) -> None:
+        """Roll dice.
+        Choose a side for the dice randomly.
+        """
         self.side = choice(DICES[self.color].sides)
 
-    # Reset dice side
-    def reset_side(self):
+    def reset_side(self) -> None:
+        """Reset dice side to None, it can be re-rolled.
+        """
         self.side = None

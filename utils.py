@@ -1,7 +1,4 @@
-"""
-
-    All miscellaneous functions goes in here
-
+"""Miscellaneous functions goes in here.
 """
 
 
@@ -10,16 +7,20 @@ from config import OS
 from strings import UtilsStrings as Strings
 
 
-# Clear console
-def clear_console():
+def clear_console() -> None:
+    """Clear console terminal.
+    """
     command = "clear"
     if OS in ["nt", "dos"]:
         command = "cls"
     system(command)
 
 
-# Capture single key stroke
-def char_input():
+def char_input() -> str:
+    """Capture and return a single character representing the key pressed.
+
+    :return: Character pressed.
+    """
     if OS in ["nt", "dos"]:  # Get key on Windows
         import msvcrt
         key = msvcrt.getwche()
@@ -39,16 +40,22 @@ def char_input():
     return key
 
 
-# Get and validate integer input
-def int_input(message, min_val, max_val):
+def int_input(message: str, min_val: int, max_val: int) -> int:
+    """Get and validate integer input.
+
+    :param message: Message prompting the user to enter an integer.
+    :param min_val: Minimum valid value for the integer.
+    :param max_val: Maximum valid value for the integer.
+    :return: Validated integer input.
+    """
     while True:
         response = input(message)
         try:
-            # Check if input is empty
+            # Input cannot be empty
             if not response:
                 raise ValueError
             response = int(response)
-            # Check if input is between given interval
+            # Input must be between given interval
             if response > max_val or response < min_val:
                 raise ValueError
         except ValueError:
@@ -57,8 +64,12 @@ def int_input(message, min_val, max_val):
             return response
 
 
-# Get text input
-def text_input(message):
+def text_input(message: str) -> str:
+    """Get and validate string input.
+
+    :param message: Message prompting the user to enter a string.
+    :return: Validated string input.
+    """
     while True:
         response = input(message)
         if response:
@@ -66,8 +77,12 @@ def text_input(message):
         print(Strings.str_warning)
 
 
-# Get boolean input
-def bool_input(message):
+def bool_input(message: str) -> bool:
+    """Get and validate a boolean input.
+
+    :param message: Message prompting the user to choose between true or false.
+    :return: Boolean choice from the user.
+    """
     while True:
         print(message)
         response = char_input().lower()
