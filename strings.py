@@ -160,8 +160,8 @@ class UtilsStrings:
     """Class to store all the utils functions strings that interface with the user.
     """
     str_warning = "Por favor entre uma resposta válida.\n"
-    truthy = ["s"]
-    falsy = ["n"]
+    truthy = ("s",)
+    falsy = ("n",)
     bool_warning = "Resposta invalida, por favor escreva sim ou não."
 
     @staticmethod

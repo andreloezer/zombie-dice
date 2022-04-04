@@ -11,7 +11,7 @@ def clear_console() -> None:
     """Clear console terminal.
     """
     command = "clear"
-    if OS in ["nt", "dos"]:
+    if OS in ("nt", "dos"):
         command = "cls"
     system(command)
 
@@ -21,7 +21,7 @@ def char_input() -> str:
 
     :return: Character pressed.
     """
-    if OS in ["nt", "dos"]:  # Get key on Windows
+    if OS in ("nt", "dos"):  # Get key on Windows
         import msvcrt
         key = msvcrt.getwche()
     else:  # Get key on UNIX
