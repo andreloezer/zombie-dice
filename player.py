@@ -3,6 +3,7 @@
 
 
 import game
+from dice import Dice
 from strings import PlayerStrings as Strings
 from utils import bool_input, clear_console
 from config import BRAIN, RUN, SHOTGUN, SHOTS_LIMIT, DICES_PER_ROUND
@@ -41,8 +42,8 @@ class Player:
             SHOTGUN: 0
         }
         self.dices = 0
-        self.hand_dices = []
-        self.table_dices = []
+        self.hand_dices: list[Dice] = []
+        self.table_dices: list[Dice] = []
         self.get_dices_amount = DICES_PER_ROUND
         self.state = PlayerStates.GAME
 
@@ -172,7 +173,7 @@ class Player:
         """
         answer = bool_input(Strings.ask_continue(self.get_dices_amount))
         if answer:
-            self.clear_hand_dices()   # Clear hand dices for next throw
+            self.clear_hand_dices()  # Clear hand dices for next throw
         else:
             self.state = PlayerStates.END
 
