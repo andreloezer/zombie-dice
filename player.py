@@ -22,6 +22,7 @@ class Player:
     """Class representing the player.
 
     :param name: Name of the player.
+    :param game_ref: Reference to the game instance.
     """
 
     # Solution to avoid circular imports when adding type annotations:
@@ -55,7 +56,6 @@ class Player:
     def clear_hand_dices(self) -> None:
         """Remove all dices that aren't RUN from player hand preparing for the next throw.
         """
-        # Remove all dices with side not equal to RUN
         hand_copy = self.hand_dices.copy()
         for dice in hand_copy:
             if not dice.side == RUN:
@@ -144,7 +144,7 @@ class Player:
         self.get_dices()  # Get dices
         self.roll_dices()  # Roll dices in hand
 
-        # Check if player lost turn
+        # Check if player lost the turn
         if self.round_status[SHOTGUN] >= SHOTS_LIMIT:
             self.state = PlayerStates.LOST
             return
@@ -190,5 +190,5 @@ class Player:
         """Finish the turn and update player score.
         """
         self.score += self.round_status[BRAIN]
-        self.state = PlayerStates.EXIT  # Update game state to exit
+        self.state = PlayerStates.EXIT  # Update player state to exit
         input(Strings.prompt_continue)
