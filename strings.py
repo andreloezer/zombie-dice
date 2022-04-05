@@ -19,7 +19,6 @@ class GameStrings:
     """Class to store all Game class related strings that interface with the user.
     """
     ask_num_players = f"Quantas pessoas vão jogar? ({MIN_PLAYERS}, {MAX_PLAYERS}): "
-    ask_name = "Nome do jogador: "
     end_game = "\nPressione ENTER para encerrar..."
     ask_continue = "Jogar mais uma vez? "
 
@@ -89,6 +88,7 @@ class GameStrings:
 class PlayerStrings:
     """Class to store all Player class related strings to be printed that interface with the user.
     """
+    ask_name = "Nome do jogador: "
     ask_throw_dices = "\nPressione ENTER para jogar os dados..."
     prompt_continue = "\nPressione ENTER para continuar..."
     picked_all_dices = (f"Não há mais dados suficientes no tubo para mais uma rodada. Os dados que deram "

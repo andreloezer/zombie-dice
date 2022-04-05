@@ -9,7 +9,7 @@ from dice import Dice
 from player import Player
 from strings import GameStrings as Strings
 from config import DICES, SCORE_LIMIT, MIN_PLAYERS, MAX_PLAYERS
-from utils import int_input, text_input, bool_input, clear_console
+from utils import int_input, bool_input, clear_console
 
 
 # Store game states
@@ -85,9 +85,10 @@ class Game:
         """
         number_of_players = int_input(Strings.ask_num_players, MIN_PLAYERS, MAX_PLAYERS)  # Ask number of players
         for player in range(number_of_players):
-            player_name = text_input(Strings.ask_name)
-            new_player = Player(player_name, self)
-            self.players.append(new_player)
+            # player_name = text_input(Strings.ask_name)
+            # new_player = Player(player_name, self)
+            # self.players.append(new_player)
+            self.players.append(Player(self))
 
     def end_game(self) -> None:
         """End game. Show players score and congrats winner.

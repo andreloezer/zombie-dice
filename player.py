@@ -5,7 +5,7 @@
 import game
 from dice import Dice
 from strings import PlayerStrings as Strings
-from utils import bool_input, clear_console
+from utils import bool_input, clear_console, text_input
 from config import BRAIN, RUN, SHOTGUN, SHOTS_LIMIT, DICES_PER_ROUND
 
 
@@ -21,21 +21,19 @@ class PlayerStates:
 class Player:
     """Class representing the player.
 
-    :param name: Name of the player.
     :param game_ref: Reference to the game instance.
     """
 
     # Solution to avoid circular imports when adding type annotations:
     # https://stackoverflow.com/questions/39740632/python-type-hinting-without-cyclic-imports/39757388#39757388
     # https://peps.python.org/pep-0484/#forward-references
-    def __init__(self, name: str, game_ref: "game.Game") -> None:
+    def __init__(self, game_ref: "game.Game") -> None:
         """Init player.
 
-        :param name: Name of the player.
         :param game_ref: Reference to the game instance.
         """
-        self.name = name
         self.game = game_ref
+        self.name = self.ask_name()
         self.score = 0
         self.round_status = {
             BRAIN: 0,
@@ -52,6 +50,10 @@ class Player:
         """Return a string representing the player with its name and score.
         """
         return Strings.repr_player(self.name, self.score)
+
+    @staticmethod
+    def ask_name() -> str:
+        return text_input(Strings.ask_name)
 
     def clear_hand_dices(self) -> None:
         """Remove all dices that aren't RUN from player hand preparing for the next throw.
