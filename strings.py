@@ -88,7 +88,6 @@ class GameStrings:
 class TurnStrings:
     """Class to store all Player class related strings to be printed that interface with the user.
     """
-    ask_name = "Nome do jogador: "
     ask_throw_dices = "\nPressione ENTER para jogar os dados..."
     prompt_continue = "\nPressione ENTER para continuar..."
     picked_all_dices = (f"Não há mais dados suficientes no tubo para mais uma rodada. Os dados que deram "
@@ -109,8 +108,8 @@ class TurnStrings:
         return text
 
     @staticmethod
-    def repr(stats, dices, score):
-        text = "\nDados acumulados da rodada:\n"
+    def repr(name, stats, dices, score):
+        text = f"\nDados acumulados pelo jogador {style(name, BOLD, UND)} nesse turno:\n"
         for stat in stats:
             text += f"{INDENT}{(style(f'{stat.capitalize()}:', BOLD)):20}{style(stats[stat], BOLD)}\n"
         text += (f"\nVocê já acumulou {style(stats[BRAIN], GREEN, BOLD, UND)} ponto(s) nessa rodada e "
@@ -128,8 +127,9 @@ class TurnStrings:
                 f" pontos, o seu acumulado é {style(score + current, GREEN, BOLD, UND)} pontos;")
 
     @staticmethod
-    def round_lost(limit):
-        return f"\nVocê acumulou {style(limit, RED, BOLD, UND)} tiros, você perdeu a rodada!"
+    def round_lost(name, shots):
+        return f"\nO jogador {style(name, BOLD, UND)} acumulou "\
+               f"{style(shots, RED, BOLD, UND)} tiros e perdeu o turno!"
 
     @staticmethod
     def ask_pick_dices(amount):

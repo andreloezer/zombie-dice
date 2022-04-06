@@ -49,7 +49,8 @@ class Turn:
 
         :return: String representing the player turn.
         """
-        return Strings.repr(self.round_status,
+        return Strings.repr(self.player.name,
+                            self.round_status,
                             self.dices,
                             self.player.score)
 
@@ -165,6 +166,6 @@ class Turn:
         Inform the loss and proceed to the next player turn or game round.
         """
         print(self)
-        print(Strings.round_lost(self.round_status[SHOTGUN]))
+        print(Strings.round_lost(self.player.name, self.round_status[SHOTGUN]))
         input(Strings.prompt_continue)
         self.state = TurnStates.EXIT
