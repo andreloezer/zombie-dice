@@ -121,9 +121,10 @@ class TurnStrings:
         return text
 
     @staticmethod
-    def enter_turn(name, score, current):
-        return (f"\n{'=' * TERMINAL_WIDTH}\nTurno do(a) {style(name, BOLD, UND)}"
-                f", a sua pontuação atual é de {style(score, GREEN, BOLD, UND)}"
+    def enter_turn(round_count, name, score, current):
+        return (f"\n{'=' * TERMINAL_WIDTH}\n"
+                f"{style(round_count, BOLD)}º Rodada, turno do(a) {style(name, BOLD, UND)}.\n"
+                f"A sua pontuação atual é de {style(score, GREEN, BOLD, UND)}"
                 f" pontos, o seu acumulado é {style(score + current, GREEN, BOLD, UND)} pontos;")
 
     @staticmethod

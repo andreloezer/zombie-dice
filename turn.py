@@ -74,7 +74,10 @@ class Turn:
         """
         # Inform the player it's their turn
         clear_console()
-        print(Strings.enter_turn(self.player.name, self.player.score, self.round_status[BRAIN]))
+        print(Strings.enter_turn(self.game.round_count,
+                                 self.player.name,
+                                 self.player.score,
+                                 self.round_status[BRAIN]))
         self.get_dices()  # Get dices
         self.roll_dices()  # Roll dices in hand
 

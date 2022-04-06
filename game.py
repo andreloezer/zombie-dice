@@ -32,6 +32,7 @@ class Game:
         self.players: list[Player] = []
         self.dice_pool: list[Dice] = []
         self.winners: list[Player] = []
+        self.round_count = 0
         self.highest_score = 0
         self.state = GameStates.SETUP
         self.game_loop()
@@ -107,11 +108,13 @@ class Game:
         self.dice_pool.clear()
         self.winners.clear()
         self.highest_score = 0
+        self.round_count = 0
         self.state = GameStates.SETUP
 
     def game_round(self, players: list[Player]) -> None:
         """Run a game turn, looping through all players.
         """
+        self.round_count += 1
         for player in players:
             Turn(self, player)
             self.create_dices()
