@@ -1,4 +1,4 @@
-"""Text (and it's logics) printed or prompted to the user/player.
+"""Text, and it's logics, printed or prompted to the user/player.
 """
 
 
@@ -85,7 +85,7 @@ class GameStrings:
 
 
 # Strings for the Player class
-class PlayerStrings:
+class TurnStrings:
     """Class to store all Player class related strings to be printed that interface with the user.
     """
     ask_name = "Nome do jogador: "
@@ -122,14 +122,10 @@ class PlayerStrings:
         return text
 
     @staticmethod
-    def enter_round(name, score, current):
-        return (f"\n{'=' * TERMINAL_WIDTH}\nRodada do(a) {style(name, BOLD, UND)}"
+    def enter_turn(name, score, current):
+        return (f"\n{'=' * TERMINAL_WIDTH}\nTurno do(a) {style(name, BOLD, UND)}"
                 f", a sua pontuação atual é de {style(score, GREEN, BOLD, UND)}"
                 f" pontos, o seu acumulado é {style(score + current, GREEN, BOLD, UND)} pontos;")
-
-    @staticmethod
-    def ask_continue(dices):
-        return f"\nPegar mais {style(dices, BOLD, UND)} dados e continuar jogando ou passar a vez? (s/n)"
 
     @staticmethod
     def round_lost(limit):
@@ -139,9 +135,20 @@ class PlayerStrings:
     def ask_pick_dices(amount):
         return f"\nPressione ENTER para pegar {style(amount, BOLD, UND)} dados do pote..."
 
+
+# Strings for the Player class
+class PlayerStrings:
+    """Class to store all Player class related strings to be printed that interface with the user.
+    """
+    ask_name = "Nome do jogador: "
+
     @staticmethod
     def repr_player(name, score):
         return f"{style(name, BOLD, UND)} fez {style(score, BOLD)} pontos."
+
+    @staticmethod
+    def ask_continue(dices):
+        return f"\nPegar mais {style(dices, BOLD, UND)} dados e continuar jogando ou passar a vez? (s/n)"
 
 
 # Strings for the Dice class

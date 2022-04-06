@@ -7,6 +7,7 @@ from random import randint, shuffle
 
 from dice import Dice
 from player import Player
+from turn import Turn
 from strings import GameStrings as Strings
 from config import DICES, SCORE_LIMIT, MIN_PLAYERS, MAX_PLAYERS
 from utils import int_input, bool_input, clear_console
@@ -85,10 +86,7 @@ class Game:
         """
         number_of_players = int_input(Strings.ask_num_players, MIN_PLAYERS, MAX_PLAYERS)  # Ask number of players
         for player in range(number_of_players):
-            # player_name = text_input(Strings.ask_name)
-            # new_player = Player(player_name, self)
-            # self.players.append(new_player)
-            self.players.append(Player(self))
+            self.players.append(Player())
 
     def end_game(self) -> None:
         """End game. Show players score and congrats winner.
@@ -115,7 +113,8 @@ class Game:
         """Run a game turn, looping through all players.
         """
         for player in players:
-            player.turn()  # Player turn
+            Turn(self, player)
+            self.create_dices()
             if player.score > self.highest_score:
                 self.highest_score = player.score  # Update the highest score in the game
 
