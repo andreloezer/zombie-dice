@@ -18,11 +18,17 @@ class Player:
 
     def __repr__(self) -> str:
         """Return a string representing the player with its name and score.
+
+        :return: String representing the player.
         """
         return Strings.repr_player(self.name, self.score)
 
     @staticmethod
     def ask_name() -> str:
+        """Ask the name of the player.
+
+        :return: String of the player name.
+        """
         return text_input(Strings.ask_name)
 
     @staticmethod

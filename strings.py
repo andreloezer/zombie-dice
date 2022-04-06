@@ -109,7 +109,7 @@ class TurnStrings:
         return text
 
     @staticmethod
-    def stats(stats, dices, score):
+    def repr(stats, dices, score):
         text = "\nDados acumulados da rodada:\n"
         for stat in stats:
             text += f"{INDENT}{(style(f'{stat.capitalize()}:', BOLD)):20}{style(stats[stat], BOLD)}\n"

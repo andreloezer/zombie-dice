@@ -44,6 +44,15 @@ class Turn:
         self.state = TurnStates.GAME
         self.turn()
 
+    def __repr__(self) -> str:
+        """Return a string representing the current player turn with all the relevant information.
+
+        :return: String representing the player turn.
+        """
+        return Strings.repr(self.round_status,
+                            self.dices,
+                            self.player.score)
+
     def turn(self) -> None:
         """Control all the player actions in the turn through a loop using state.
         """
@@ -75,7 +84,7 @@ class Turn:
 
         # Calculate how many dices to get from the pool on the next turn
         self.get_dices_amount = DICES_PER_ROUND - self.round_status[RUN]
-        self.print_stats()  # Show player current turn status
+        print(self)  # Show player current turn status
 
         self.ask_continue()  # Ask if player wants to continue playing the turn
 
@@ -117,12 +126,6 @@ class Turn:
         print(Strings.rolled_dices(self.hand_dices))
         input(Strings.prompt_continue)
 
-    def print_stats(self) -> None:
-        """Print player current turn info."""
-        print(Strings.stats(self.round_status,
-                            self.dices,
-                            self.player.score))
-
     def ask_continue(self) -> None:
         """Ask if player wants to continue playing more hands in the current turn.
         """
@@ -161,7 +164,7 @@ class Turn:
         """Player looses the score accumulated in the turn.
         Inform the loss and proceed to the next player turn or game round.
         """
-        self.print_stats()
-        print(Strings.round_lost(SHOTS_LIMIT))
+        print(self)
+        print(Strings.round_lost(self.round_status[SHOTGUN]))
         input(Strings.prompt_continue)
         self.state = TurnStates.EXIT

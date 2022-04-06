@@ -24,6 +24,8 @@ class Dice:
 
     def __repr__(self) -> str:
         """Return a string representing the dice in the game with its color and side.
+
+        :return: String representing the dice.
         """
         return Strings.repr(self.color, self.side)
 
