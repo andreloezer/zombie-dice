@@ -9,7 +9,6 @@ from config import DICES
 from strings import DiceStrings as Strings
 
 
-# All Dice related logic
 class Dice:
     """Class to represent the dice.
     """

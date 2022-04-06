@@ -14,7 +14,6 @@ GAME_NAME = "Bem vindo ao ZOMBIE DICE!!!"
 INDENT = " " * 4
 
 
-# Strings for the Game class
 class GameStrings:
     """Class to store all Game class related strings that interface with the user.
     """
@@ -84,7 +83,6 @@ class GameStrings:
         return text
 
 
-# Strings for the Player class
 class TurnStrings:
     """Class to store all Player class related strings to be printed that interface with the user.
     """
@@ -137,7 +135,6 @@ class TurnStrings:
         return f"\nPressione ENTER para pegar {style(amount, BOLD, UND)} dados do pote..."
 
 
-# Strings for the Player class
 class PlayerStrings:
     """Class to store all Player class related strings to be printed that interface with the user.
     """
@@ -152,7 +149,6 @@ class PlayerStrings:
         return f"\nPegar mais {style(dices, BOLD, UND)} dados e continuar jogando ou passar a vez? (s/n)"
 
 
-# Strings for the Dice class
 class DiceStrings:
     """Class to store all Dice class related strings to be printed that interface with the user.
     """
@@ -163,7 +159,6 @@ class DiceStrings:
         return f"Dado: {style(color.capitalize(), color):20}Lado: {style(value.capitalize(), BOLD)}"
 
 
-# Strings for the Utils functions
 class UtilsStrings:
     """Class to store all the utils functions strings that interface with the user.
     """
