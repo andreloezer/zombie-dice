@@ -4,13 +4,12 @@
 
 from random import randint, shuffle
 
-
-from dice import Dice
 from player import Player
+from dice import Dice
 from turn import Turn
 from strings import GameStrings as Strings
 from config import DICES, SCORE_LIMIT, MIN_PLAYERS, MAX_PLAYERS
-from utils import int_input, bool_input, clear_console
+from utils import int_input, bool_input, clear_console, stringify
 
 
 # Store game states
@@ -92,7 +91,7 @@ class Game:
     def end_game(self) -> None:
         """End game. Show players score and congrats winner.
         """
-        print(Strings.end_game_players(self.players, self.winners[0].name))
+        print(Strings.end_game_players(stringify(self.players), self.winners[0].name))
         input(Strings.end_game)
         clear_console()
         answer = bool_input(Strings.ask_continue)  # Ask if user wants to play again
@@ -132,7 +131,7 @@ class Game:
             # There is only one player with the highest score
             self.state = GameStates.END
         else:
-            print(Strings.draw(self.winners))  # Inform the user there is a draw
+            print(Strings.draw(stringify(self.winners)))  # Inform the user there is a draw
 
     def game_loop(self) -> None:
         """All the game happens inside this loop.

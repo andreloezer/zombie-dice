@@ -7,7 +7,7 @@ from player import Player
 from dice import Dice
 from config import BRAIN, RUN, SHOTGUN, SHOTS_LIMIT, DICES_PER_ROUND
 from strings import TurnStrings as Strings
-from utils import clear_console
+from utils import clear_console, stringify
 
 
 class TurnStates:
@@ -37,22 +37,22 @@ class Turn:
             RUN: 0,
             SHOTGUN: 0
         }
-        self.dices = 0
+        self.amount_picked_dices = 0
         self.hand_dices: list[Dice] = []
         self.table_dices: list[Dice] = []
         self.get_dices_amount = DICES_PER_ROUND
         self.state = TurnStates.GAME
         self.turn()
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         """Return a string representing the current player turn with all the relevant information.
 
         :return: String representing the player turn.
         """
-        return Strings.repr(self.player.name,
-                            self.round_status,
-                            self.dices,
-                            self.player.score)
+        return Strings.display_turn(self.player.name,
+                                    self.round_status,
+                                    self.amount_picked_dices,
+                                    self.player.score)
 
     def turn(self) -> None:
         """Control all the player actions in the turn through a loop using state.
@@ -108,12 +108,12 @@ class Turn:
         input(Strings.ask_pick_dices(self.get_dices_amount))  # Ask player to pick the dices
 
         # Pick and display dices to the player
-        self.dices += self.get_dices_amount
+        self.amount_picked_dices += self.get_dices_amount
         picked_dices = []
         for i in range(self.get_dices_amount):
             dice = self.game.take_dice()
             picked_dices.append(dice)
-        print(Strings.picked_dices(picked_dices))
+        print(Strings.picked_dices(stringify(picked_dices)))
         self.hand_dices.extend(picked_dices)
 
     def roll_dices(self) -> None:
@@ -127,7 +127,7 @@ class Turn:
             dice.roll_dice()
             self.round_status[dice.side] += 1  # Save result player score
 
-        print(Strings.rolled_dices(self.hand_dices))
+        print(Strings.rolled_dices(stringify(self.hand_dices)))
         input(Strings.prompt_continue)
 
     def ask_continue(self) -> None:
@@ -149,7 +149,7 @@ class Turn:
                 self.game.return_dice(dice)
 
     def clear_hand_dices(self) -> None:
-        """Remove all dices that aren't RUN from player hand preparing for the next throw.
+        """Remove all dices that aren't RUN from the hand, preparing for the next throw.
         """
         hand_copy = self.hand_dices.copy()
         for dice in hand_copy:

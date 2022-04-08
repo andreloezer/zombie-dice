@@ -6,7 +6,7 @@ from random import choice
 from typing import Union
 
 from config import DICES
-from strings import DiceStrings as Strings
+import strings
 
 
 class Dice:
@@ -21,12 +21,12 @@ class Dice:
         self.color = color
         self.side: Union[str, None] = None
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         """Return a string representing the dice in the game with its color and side.
 
         :return: String representing the dice.
         """
-        return Strings.repr(self.color, self.side)
+        return strings.DiceStrings.display_dice(self.color, self.side)
 
     def roll_dice(self) -> None:
         """Roll dice.

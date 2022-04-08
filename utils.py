@@ -3,6 +3,7 @@
 
 
 from os import system
+
 from config import OS
 from strings import UtilsStrings as Strings
 
@@ -93,3 +94,12 @@ def bool_input(message: str) -> bool:
             return False
         else:
             print(Strings.bool_warning)
+
+
+def stringify(obj_list: list[object]) -> list[str]:
+    """Convert list of objects into list of strings.
+
+    :param obj_list: List of objects.
+    :return: List of strings.
+    """
+    return [obj.__str__() for obj in obj_list]
