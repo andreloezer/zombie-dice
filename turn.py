@@ -125,7 +125,7 @@ class Turn:
         # Roll all dices in hand
         for dice in self.hand_dices:
             dice.roll_dice()
-            self.round_status[dice.side] += 1  # Save result player score
+            self.round_status[dice.get_value()] += 1  # Save result player score
 
         print(Strings.rolled_dices(stringify(self.hand_dices)))
         input(Strings.prompt_continue)
@@ -144,7 +144,7 @@ class Turn:
         """
         print(Strings.picked_all_dices)
         for dice in self.table_dices:
-            if dice.side == BRAIN:
+            if dice.get_value() == BRAIN:
                 dice.reset_side()
                 self.game.return_dice(dice)
 
@@ -153,7 +153,7 @@ class Turn:
         """
         hand_copy = self.hand_dices.copy()
         for dice in hand_copy:
-            if not dice.side == RUN:
+            if not dice.get_value() == RUN:
                 self.table_dices.append(dice)
                 self.hand_dices.remove(dice)
 

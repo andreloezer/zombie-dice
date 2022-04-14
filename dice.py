@@ -18,23 +18,37 @@ class Dice:
 
         :param color: Color of the dice representing its difficult.
         """
-        self.color = color
-        self.side: Union[str, None] = None
+        self.__color = color
+        self.__side: Union[str, None] = None
 
     def __str__(self) -> str:
         """Return a string representing the dice in the game with its color and side.
 
         :return: String representing the dice.
         """
-        return strings.DiceStrings.display_dice(self.color, self.side)
+        return strings.DiceStrings.display_dice(self.__color, self.__side)
 
     def roll_dice(self) -> None:
         """Roll dice.
         Choose a side for the dice randomly.
         """
-        self.side = choice(DICES[self.color].sides)
+        self.__side = choice(DICES[self.__color].sides)
 
     def reset_side(self) -> None:
         """Reset dice side to None, it can be re-rolled.
         """
-        self.side = None
+        self.__side = None
+
+    def get_color(self) -> str:
+        """Return dice color.
+
+        :return: String of the dice color.
+        """
+        return self.__color
+
+    def get_value(self) -> str:
+        """Return dice rolled value.
+
+        :return: String of the dice rolled value.
+        """
+        return self.__side
