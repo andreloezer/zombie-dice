@@ -91,7 +91,7 @@ class GameStrings:
         return text
 
     @staticmethod
-    def end_game_players(players: list[str], winner: list[str]) -> str:
+    def end_game_players(players: list[str], winner: str) -> str:
 
         """Show all players final score and congratulates the winner.
 
@@ -160,7 +160,7 @@ class TurnStrings:
         return text
 
     @staticmethod
-    def enter_turn(round_count: int, name: int, score: int, current: int) -> str:
+    def enter_turn(round_count: int, name: str, score: int, current: int) -> str:
         """Announces the start of the player turn.
 
         :param round_count: Number of rounds already played.

@@ -13,18 +13,39 @@ class Player:
     def __init__(self) -> None:
         """Init player.
         """
-        self.name = self.ask_name()
-        self.score = 0
+        self.__name = self.__ask_name()
+        self.__score = 0
 
     def __str__(self) -> str:
         """Return a string representing the player with its name and score.
 
         :return: String representing the player.
         """
-        return Strings.display_player(self.name, self.score)
+        return Strings.display_player(self.__name, self.__score)
+
+    def get_name(self) -> str:
+        """Returns player name.
+
+        :return: String of the player name.
+        """
+        return self.__name
+
+    def get_score(self) -> int:
+        """Returns player score.
+
+        :return: Player score.
+        """
+        return self.__score
+
+    def add_to_score(self, score) -> None:
+        """Add to player score.
+
+        :param score: Turn score to add to the player total score.
+        """
+        self.__score += score
 
     @staticmethod
-    def ask_name() -> str:
+    def __ask_name() -> str:
         """Ask the name of the player.
 
         :return: String of the player name.

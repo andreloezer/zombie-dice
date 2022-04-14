@@ -91,7 +91,7 @@ class Game:
     def end_game(self) -> None:
         """End game. Show players score and congrats winner.
         """
-        print(Strings.end_game_players(stringify(self.players), self.winners[0].name))
+        print(Strings.end_game_players(stringify(self.players), self.winners[0].get_name()))
         input(Strings.end_game)
         clear_console()
         answer = bool_input(Strings.ask_continue)  # Ask if user wants to play again
@@ -117,14 +117,14 @@ class Game:
         for player in players:
             Turn(self, player)
             self.create_dices()
-            if player.score > self.highest_score:
-                self.highest_score = player.score  # Update the highest score in the game
+            if player.get_score() > self.highest_score:
+                self.highest_score = player.get_score()  # Update the highest score in the game
 
         # Check if someone wins or if it's a draw
         self.winners.clear()
         if self.highest_score >= SCORE_LIMIT:
             for player in players:
-                if player.score == self.highest_score:
+                if player.get_score() == self.highest_score:
                     self.winners.append(player)  # Save each player that reached the highest score
                     self.state = GameStates.DRAW
         if self.winners and len(self.winners) < 2:

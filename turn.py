@@ -49,10 +49,10 @@ class Turn:
 
         :return: String representing the player turn.
         """
-        return Strings.display_turn(self.player.name,
+        return Strings.display_turn(self.player.get_name(),
                                     self.round_status,
                                     self.amount_picked_dices,
-                                    self.player.score)
+                                    self.player.get_score())
 
     def turn(self) -> None:
         """Control all the player actions in the turn through a loop using state.
@@ -75,8 +75,8 @@ class Turn:
         # Inform the player it's their turn
         clear_console()
         print(Strings.enter_turn(self.game.round_count,
-                                 self.player.name,
-                                 self.player.score,
+                                 self.player.get_name(),
+                                 self.player.get_score(),
                                  self.round_status[BRAIN]))
         self.get_dices()  # Get dices
         self.roll_dices()  # Roll dices in hand
@@ -160,7 +160,7 @@ class Turn:
     def end_round(self) -> None:
         """Finish the turn and update player score.
         """
-        self.player.score += self.round_status[BRAIN]
+        self.player.add_to_score(self.round_status[BRAIN])
         self.state = TurnStates.EXIT  # Update turn state to exit
         input(Strings.prompt_continue)
 
@@ -169,6 +169,6 @@ class Turn:
         Inform the loss and proceed to the next player turn or game round.
         """
         print(self)
-        print(Strings.round_lost(self.player.name, self.round_status[SHOTGUN]))
+        print(Strings.round_lost(self.player.get_name(), self.round_status[SHOTGUN]))
         input(Strings.prompt_continue)
         self.state = TurnStates.EXIT
