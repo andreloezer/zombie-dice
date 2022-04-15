@@ -2,7 +2,7 @@
 """
 
 
-from random import randint, shuffle
+from random import randrange, shuffle
 
 from player import Player
 from dice import Dice
@@ -41,7 +41,7 @@ class Game:
 
         :return: Single dice.
         """
-        return self.__dice_pool.pop(randint(0, (len(self.__dice_pool) - 1)))
+        return self.__dice_pool.pop(randrange(0, len(self.__dice_pool)))
 
     def return_dice(self, dice: Dice) -> None:
         """Return dice to the dice pool.
