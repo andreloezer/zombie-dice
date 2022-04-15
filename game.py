@@ -13,7 +13,7 @@ from utils import int_input, bool_input, clear_console, stringify
 
 
 # Store game states
-class GameStates:
+class _GameStates:
     """Class to store game states.
     """
     SETUP = "setup"
@@ -33,7 +33,7 @@ class Game:
         self.__winners: list[Player] = []
         self.__round_count = 0
         self.__highest_score = 0
-        self.__state = GameStates.SETUP
+        self.__state = _GameStates.SETUP
         self.__game_loop()
 
     def take_dice(self) -> Dice:
@@ -93,7 +93,7 @@ class Game:
         print(Strings.greet_user())  # Greet user
         self.__create_dices()  # Create dices
         self.__create_players()   # Create players
-        self.__state = GameStates.GAME  # Change state to GAME
+        self.__state = _GameStates.GAME  # Change state to GAME
 
     def __create_players(self) -> None:
         """Ask players names, create and store them.
@@ -122,7 +122,7 @@ class Game:
         self.__winners.clear()
         self.__highest_score = 0
         self.__round_count = 0
-        self.__state = GameStates.SETUP
+        self.__state = _GameStates.SETUP
 
     def __game_round(self, players: list[Player]) -> None:
         """Run a game turn, looping through all players.
@@ -140,10 +140,10 @@ class Game:
             for player in players:
                 if player.get_score() == self.__highest_score:
                     self.__winners.append(player)  # Save each player that reached the highest score
-                    self.__state = GameStates.DRAW
+                    self.__state = _GameStates.DRAW
         if self.__winners and len(self.__winners) < 2:
             # There is only one player with the highest score
-            self.__state = GameStates.END
+            self.__state = _GameStates.END
         else:
             print(Strings.draw(stringify(self.__winners)))  # Inform the user there is a draw
 
@@ -153,11 +153,11 @@ class Game:
         """
         while True:
             match self.__state:
-                case GameStates.SETUP:
+                case _GameStates.SETUP:
                     self.__setup_game()  # Set the game up
-                case GameStates.GAME:
+                case _GameStates.GAME:
                     self.__game_round(self.__players)  # Game turn with all players
-                case GameStates.DRAW:
+                case _GameStates.DRAW:
                     self.__game_round(self.__winners)  # Game turn with draw players
-                case GameStates.END:
+                case _GameStates.END:
                     self.__end_game()  # End the game

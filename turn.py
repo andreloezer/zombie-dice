@@ -10,7 +10,7 @@ from strings import TurnStrings as Strings
 from utils import clear_console, stringify
 
 
-class TurnStates:
+class _TurnStates:
     """Class to store turn states
     """
     GAME = "game"
@@ -41,7 +41,7 @@ class Turn:
         self.__hand_dices: list[Dice] = []
         self.__table_dices: list[Dice] = []
         self.__get_dices_amount = DICES_PER_ROUND
-        self.__state = TurnStates.GAME
+        self.__state = _TurnStates.GAME
         self.__turn()
 
     def __str__(self) -> str:
@@ -57,16 +57,16 @@ class Turn:
     def __turn(self) -> None:
         """Control all the player actions in the turn through a loop using state.
         """
-        self.state = TurnStates.GAME
+        self.state = _TurnStates.GAME
         while True:
             match self.__state:
-                case TurnStates.GAME:
+                case _TurnStates.GAME:
                     self.__play()  # Play a turn
-                case TurnStates.END:
+                case _TurnStates.END:
                     self.__end_round()  # End player turn saving score
-                case TurnStates.LOST:
+                case _TurnStates.LOST:
                     self.__lost()  # End player turn not saving score
-                case TurnStates.EXIT:
+                case _TurnStates.EXIT:
                     return
 
     def __play(self) -> None:
@@ -83,7 +83,7 @@ class Turn:
 
         # Check if player lost the turn
         if self.__round_status[SHOTGUN] >= SHOTS_LIMIT:
-            self.__state = TurnStates.LOST
+            self.__state = _TurnStates.LOST
             return
 
         # Calculate how many dices to get from the pool on the next turn
@@ -137,7 +137,7 @@ class Turn:
         if answer:
             self.__clear_hand_dices()  # Clear hand dices for next throw
         else:
-            self.__state = TurnStates.END
+            self.__state = _TurnStates.END
 
     def __continue_playing(self) -> None:
         """Return all BRAIN dices to the pool to keep playing.
@@ -161,7 +161,7 @@ class Turn:
         """Finish the turn and update player score.
         """
         self.__player.add_to_score(self.__round_status[BRAIN])
-        self.__state = TurnStates.EXIT  # Update turn state to exit
+        self.__state = _TurnStates.EXIT  # Update turn state to exit
         input(Strings.prompt_continue)
 
     def __lost(self) -> None:
@@ -171,4 +171,4 @@ class Turn:
         print(self)
         print(Strings.round_lost(self.__player.get_name(), self.__round_status[SHOTGUN]))
         input(Strings.prompt_continue)
-        self.__state = TurnStates.EXIT
+        self.__state = _TurnStates.EXIT
