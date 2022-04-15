@@ -74,7 +74,7 @@ class Turn:
         """
         # Inform the player it's their turn
         clear_console()
-        print(Strings.enter_turn(self.__game.round_count,
+        print(Strings.enter_turn(self.__game.get_round_count(),
                                  self.__player.get_name(),
                                  self.__player.get_score(),
                                  self.__round_status[BRAIN]))
@@ -92,7 +92,7 @@ class Turn:
 
         self.__ask_continue()  # Ask if player wants to continue playing the turn
 
-        if len(self.__game.dice_pool) < self.__get_dices_amount:
+        if self.__game.get_dice_pool_len() < self.__get_dices_amount:
             # Not enough dices to continue the player turn
             self.__continue_playing()
 

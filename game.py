@@ -28,122 +28,136 @@ class Game:
 
     def __init__(self) -> None:
         """Init game class."""
-        self.players: list[Player] = []
-        self.dice_pool: list[Dice] = []
-        self.winners: list[Player] = []
-        self.round_count = 0
-        self.highest_score = 0
-        self.state = GameStates.SETUP
-        self.game_loop()
+        self.__players: list[Player] = []
+        self.__dice_pool: list[Dice] = []
+        self.__winners: list[Player] = []
+        self.__round_count = 0
+        self.__highest_score = 0
+        self.__state = GameStates.SETUP
+        self.__game_loop()
 
     def take_dice(self) -> Dice:
         """Pop 1 dice from the dice pool and return it.
 
         :return: Single dice.
         """
-        return self.dice_pool.pop(randint(0, (len(self.dice_pool) - 1)))
+        return self.__dice_pool.pop(randint(0, (len(self.__dice_pool) - 1)))
 
     def return_dice(self, dice: Dice) -> None:
         """Return dice to the dice pool.
 
         :param dice: Dice to return to the dice pool.
         """
-        self.dice_pool.append(dice)
+        self.__dice_pool.append(dice)
+
+    def get_round_count(self) -> int:
+        """Returns current round count.
+
+        :return: Number of the current round count.
+        """
+        return self.__round_count
+
+    def get_dice_pool_len(self) -> int:
+        """Returns current length of the dice pool.
+
+        :return: Length of the dice pool.
+        """
+        return len(self.__dice_pool)
 
     def shuffle_dice_pool(self) -> None:
         """Shuffle dices in the dice pool.
         """
-        shuffle(self.dice_pool)
+        shuffle(self.__dice_pool)
 
-    def create_dices(self) -> None:
+    def __create_dices(self) -> None:
         """Create dices and fill the dice pool.
         """
-        self.dice_pool.clear()
+        self.__dice_pool.clear()
         for dice_type in DICES:
             # Create dices of each color
             for i in range(DICES[dice_type].amount):
                 dice = Dice(dice_type)
-                self.dice_pool.append(dice)
+                self.__dice_pool.append(dice)
 
         self.shuffle_dice_pool()  # Shuffle dices in dice pool
 
     def display_dices(self) -> None:
         """Show dices in the dice pool.
         """
-        print(Strings.display_dices(self.dice_pool))
+        print(Strings.display_dices(self.__dice_pool))
 
-    def setup_game(self) -> None:
+    def __setup_game(self) -> None:
         """Setup game, players and dices.
         """
         clear_console()
         print(Strings.greet_user())  # Greet user
-        self.create_dices()  # Create dices
-        self.create_players()   # Create players
-        self.state = GameStates.GAME  # Change state to GAME
+        self.__create_dices()  # Create dices
+        self.__create_players()   # Create players
+        self.__state = GameStates.GAME  # Change state to GAME
 
-    def create_players(self) -> None:
+    def __create_players(self) -> None:
         """Ask players names, create and store them.
         """
         number_of_players = int_input(Strings.ask_num_players, MIN_PLAYERS, MAX_PLAYERS)  # Ask number of players
         for player in range(number_of_players):
-            self.players.append(Player())
+            self.__players.append(Player())
 
-    def end_game(self) -> None:
+    def __end_game(self) -> None:
         """End game. Show players score and congrats winner.
         """
-        print(Strings.end_game_players(stringify(self.players), self.winners[0].get_name()))
+        print(Strings.end_game_players(stringify(self.__players), self.__winners[0].get_name()))
         input(Strings.end_game)
         clear_console()
         answer = bool_input(Strings.ask_continue)  # Ask if user wants to play again
         if answer:
-            self.reset_game()  # Set game for next play
+            self.__reset_game()  # Set game for next play
         else:
             quit()  # Exit game
 
-    def reset_game(self) -> None:
+    def __reset_game(self) -> None:
         """Reset game memory back to initialization.
         """
-        self.players.clear()
-        self.dice_pool.clear()
-        self.winners.clear()
-        self.highest_score = 0
-        self.round_count = 0
-        self.state = GameStates.SETUP
+        self.__players.clear()
+        self.__dice_pool.clear()
+        self.__winners.clear()
+        self.__highest_score = 0
+        self.__round_count = 0
+        self.__state = GameStates.SETUP
 
-    def game_round(self, players: list[Player]) -> None:
+    def __game_round(self, players: list[Player]) -> None:
         """Run a game turn, looping through all players.
         """
-        self.round_count += 1
+        self.__round_count += 1
         for player in players:
             Turn(self, player)
-            self.create_dices()
-            if player.get_score() > self.highest_score:
-                self.highest_score = player.get_score()  # Update the highest score in the game
+            self.__create_dices()
+            if player.get_score() > self.__highest_score:
+                self.__highest_score = player.get_score()  # Update the highest score in the game
 
         # Check if someone wins or if it's a draw
-        self.winners.clear()
-        if self.highest_score >= SCORE_LIMIT:
+        self.__winners.clear()
+        if self.__highest_score >= SCORE_LIMIT:
             for player in players:
-                if player.get_score() == self.highest_score:
-                    self.winners.append(player)  # Save each player that reached the highest score
-                    self.state = GameStates.DRAW
-        if self.winners and len(self.winners) < 2:
+                if player.get_score() == self.__highest_score:
+                    self.__winners.append(player)  # Save each player that reached the highest score
+                    self.__state = GameStates.DRAW
+        if self.__winners and len(self.__winners) < 2:
             # There is only one player with the highest score
-            self.state = GameStates.END
+            self.__state = GameStates.END
         else:
-            print(Strings.draw(stringify(self.winners)))  # Inform the user there is a draw
+            print(Strings.draw(stringify(self.__winners)))  # Inform the user there is a draw
 
-    def game_loop(self) -> None:
+    def __game_loop(self) -> None:
         """All the game happens inside this loop.
         It controls the flow of the game.
         """
         while True:
-            match self.state:
+            match self.__state:
                 case GameStates.SETUP:
-                    self.setup_game()  # Set the game up
+                    self.__setup_game()  # Set the game up
                 case GameStates.GAME:
-                    self.game_round(self.players)  # Game turn with all players
+                    self.__game_round(self.__players)  # Game turn with all players
                 case GameStates.DRAW:
-                    self.game_round(self.winners)  # Game turn with draw players
+                    self.__game_round(self.__winners)  # Game turn with draw players
                 case GameStates.END:
-                    self.end_game()  # End the game
+                    self.__end_game()  # End the game
