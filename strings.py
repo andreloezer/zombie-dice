@@ -139,16 +139,18 @@ class TurnStrings:
         return text
 
     @staticmethod
-    def display_turn(name: str, stats: dict[str, int], dices: int, score: int) -> str:
+    def display_turn(index: int, name: str, stats: dict[str, int], dices: int, score: int) -> str:
         """Display the current turn status showing the player, amount of picked dices and player score.
 
+        :param index: Player index.
         :param name: String of the player name.
         :param stats: Dict with the amount of dice sides accumulated during the turn.
         :param dices: Number of all dices picked byt the player.
         :param score: Player score.
         :return: String displaying current round info.
         """
-        text = f"\nDados acumulados pelo jogador {style(name, BOLD, UND)} nesse turno:\n"
+        text = f"\nDados acumulados pelo {style(index, BOLD, UND)}º jogador - "\
+               f"{style(name, BOLD, UND)} nesse turno:\n"
         for stat in stats:
             text += f"{INDENT}{(style(f'{stat.capitalize()}:', BOLD)):20}{style(stats[stat], BOLD)}\n"
         text += (f"\nVocê já acumulou {style(stats[BRAIN], GREEN, BOLD, UND)} ponto(s) nessa rodada e "
@@ -160,9 +162,10 @@ class TurnStrings:
         return text
 
     @staticmethod
-    def enter_turn(round_count: int, name: str, score: int, current: int) -> str:
+    def enter_turn(round_count: int, index: int, name: str, score: int, current: int) -> str:
         """Announces the start of the player turn.
 
+        :param index: Player index.
         :param round_count: Number of rounds already played.
         :param name: String of the player name.
         :param score: Number of accumulate points of the player through the game.
@@ -170,19 +173,20 @@ class TurnStrings:
         :return: String announcing the start of the turn.
         """
         return (f"\n{'=' * TERMINAL_WIDTH}\n"
-                f"{style(round_count, BOLD)}º Rodada, turno do(a) {style(name, BOLD, UND)}.\n"
-                f"A sua pontuação atual é de {style(score, GREEN, BOLD, UND)}"
+                f"{style(round_count, BOLD)}º Rodada, turno do {style(index, BOLD, UND)}º jogador - "
+                f"{style(name, BOLD, UND)}.\nA sua pontuação atual é de {style(score, GREEN, BOLD, UND)}"
                 f" pontos, o seu acumulado é {style(score + current, GREEN, BOLD, UND)} pontos;")
 
     @staticmethod
-    def round_lost(name: str, shots: int) -> str:
+    def round_lost(index: int, name: str, shots: int) -> str:
         """Inform the player about the loss of the turn.
 
+        :param index: Player index.
         :param name: String of the player name.
         :param shots: Number of shots player took during the turn.
         :return: String informing turn loss.
         """
-        return f"\nO jogador {style(name, BOLD, UND)} acumulou "\
+        return f"\nO {style(index, BOLD, UND)}º jogador {style(name, BOLD, UND)} acumulou "\
                f"{style(shots, RED, BOLD, UND)} tiros e perdeu o turno!"
 
     @staticmethod
@@ -201,14 +205,15 @@ class PlayerStrings:
     ask_name = "Nome do jogador: "
 
     @staticmethod
-    def display_player(name: str, score: int) -> str:
+    def display_player(index: int, name: str, score: int) -> str:
         """Display player info.
 
+        :param index: Player index.
         :param name: String of the player name.
         :param score: Number of accumulate points of the player through the game.
         :return: String of the player.
         """
-        return f"{style(name, BOLD, UND)} fez {style(score, BOLD)} pontos."
+        return f"O {style(index, BOLD, UND)}º jogador {style(name, BOLD, UND)} fez {style(score, BOLD)} pontos."
 
     @staticmethod
     def ask_continue(dices: int) -> str:

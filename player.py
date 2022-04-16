@@ -15,13 +15,30 @@ class Player:
         """
         self.__name = self.__ask_name()
         self.__score = 0
+        self.__index = None
 
     def __str__(self) -> str:
         """Return a string representing the player with its name and score.
 
         :return: String representing the player.
         """
-        return Strings.display_player(self.__name, self.__score)
+        return Strings.display_player(self.__index + 1, self.__name, self.__score)
+
+    @property
+    def index(self) -> int:
+        """Returns player index.
+
+        :return: Index of the player.
+        """
+        return self.__index
+
+    @index.setter
+    def index(self, index) -> None:
+        """Set player index.
+
+        :param index: Player index.
+        """
+        self.__index = index
 
     @property
     def name(self) -> str:

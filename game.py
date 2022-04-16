@@ -98,11 +98,14 @@ class Game:
         self.__state = _GameStates.GAME  # Change state to GAME
 
     def __create_players(self) -> None:
-        """Ask players names, create and store them.
+        """Asks players names, create and store them in the players list, then shuffle it.
         """
         number_of_players = int_input(Strings.ask_num_players, MIN_PLAYERS, MAX_PLAYERS)  # Ask number of players
         for player in range(number_of_players):
             self.__players.append(Player())
+        shuffle(self.__players)
+        for index, player in enumerate(self.__players):
+            player.index = index
 
     def __end_game(self) -> None:
         """End game. Show players score and congrats winner.

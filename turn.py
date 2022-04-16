@@ -49,7 +49,8 @@ class Turn:
 
         :return: String representing the player turn.
         """
-        return Strings.display_turn(self.__player.name,
+        return Strings.display_turn(self.__player.index + 1,
+                                    self.__player.name,
                                     self.__round_status,
                                     self.__amount_picked_dices,
                                     self.__player.score)
@@ -75,6 +76,7 @@ class Turn:
         # Inform the player it's their turn
         clear_console()
         print(Strings.enter_turn(self.__game.round_count,
+                                 self.__player.index + 1,
                                  self.__player.name,
                                  self.__player.score,
                                  self.__round_status[BRAIN]))
@@ -169,6 +171,6 @@ class Turn:
         Inform the loss and proceed to the next player turn or game round.
         """
         print(self)
-        print(Strings.round_lost(self.__player.name, self.__round_status[SHOTGUN]))
+        print(Strings.round_lost(self.__player.index + 1, self.__player.name, self.__round_status[SHOTGUN]))
         input(Strings.prompt_continue)
         self.__state = _TurnStates.EXIT
