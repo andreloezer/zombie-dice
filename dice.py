@@ -39,14 +39,16 @@ class Dice:
         """
         self.__side = None
 
-    def get_color(self) -> str:
+    @property
+    def color(self) -> str:
         """Return dice color.
 
         :return: String of the dice color.
         """
         return self.__color
 
-    def get_value(self) -> str:
+    @property
+    def value(self) -> str:
         """Return dice rolled value.
 
         :return: String of the dice rolled value.

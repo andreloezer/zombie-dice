@@ -49,10 +49,10 @@ class Turn:
 
         :return: String representing the player turn.
         """
-        return Strings.display_turn(self.__player.get_name(),
+        return Strings.display_turn(self.__player.name,
                                     self.__round_status,
                                     self.__amount_picked_dices,
-                                    self.__player.get_score())
+                                    self.__player.score)
 
     def __turn(self) -> None:
         """Control all the player actions in the turn through a loop using state.
@@ -74,9 +74,9 @@ class Turn:
         """
         # Inform the player it's their turn
         clear_console()
-        print(Strings.enter_turn(self.__game.get_round_count(),
-                                 self.__player.get_name(),
-                                 self.__player.get_score(),
+        print(Strings.enter_turn(self.__game.round_count,
+                                 self.__player.name,
+                                 self.__player.score,
                                  self.__round_status[BRAIN]))
         self.__get_dices()  # Get dices
         self.__roll_dices()  # Roll dices in hand
@@ -92,7 +92,7 @@ class Turn:
 
         self.__ask_continue()  # Ask if player wants to continue playing the turn
 
-        if self.__game.get_dice_pool_len() < self.__get_dices_amount:
+        if len(self.__game.dice_pool) < self.__get_dices_amount:
             # Not enough dices to continue the player turn
             self.__continue_playing()
 
@@ -125,7 +125,7 @@ class Turn:
         # Roll all dices in hand
         for dice in self.__hand_dices:
             dice.roll_dice()
-            self.__round_status[dice.get_value()] += 1  # Save result player score
+            self.__round_status[dice.value] += 1  # Save result player score
 
         print(Strings.rolled_dices(stringify(self.__hand_dices)))
         input(Strings.prompt_continue)
@@ -144,7 +144,7 @@ class Turn:
         """
         print(Strings.picked_all_dices)
         for dice in self.__table_dices:
-            if dice.get_value() == BRAIN:
+            if dice.value == BRAIN:
                 dice.reset_side()
                 self.__game.return_dice(dice)
 
@@ -153,14 +153,14 @@ class Turn:
         """
         hand_copy = self.__hand_dices.copy()
         for dice in hand_copy:
-            if not dice.get_value() == RUN:
+            if not dice.value == RUN:
                 self.__table_dices.append(dice)
                 self.__hand_dices.remove(dice)
 
     def __end_round(self) -> None:
         """Finish the turn and update player score.
         """
-        self.__player.add_to_score(self.__round_status[BRAIN])
+        self.__player.score += self.__round_status[BRAIN]
         self.__state = _TurnStates.EXIT  # Update turn state to exit
         input(Strings.prompt_continue)
 
@@ -169,6 +169,6 @@ class Turn:
         Inform the loss and proceed to the next player turn or game round.
         """
         print(self)
-        print(Strings.round_lost(self.__player.get_name(), self.__round_status[SHOTGUN]))
+        print(Strings.round_lost(self.__player.name, self.__round_status[SHOTGUN]))
         input(Strings.prompt_continue)
         self.__state = _TurnStates.EXIT

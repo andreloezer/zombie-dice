@@ -73,7 +73,7 @@ class GameStrings:
 
         text += "\n\nO pote contém os seguintes tipos de dados:"
         for color in DICES.keys():
-            amount = len([dice for dice_obj in dices if dice_obj.get_color() == color])
+            amount = len([dice for dice_obj in dices if dice_obj.color == color])
             text += f"\n{INDENT}{style(color.capitalize(), BOLD, color) + ':':23} {style(amount, BOLD)}"
 
         return text

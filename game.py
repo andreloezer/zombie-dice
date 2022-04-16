@@ -50,19 +50,21 @@ class Game:
         """
         self.__dice_pool.append(dice)
 
-    def get_round_count(self) -> int:
+    @property
+    def round_count(self) -> int:
         """Returns current round count.
 
         :return: Number of the current round count.
         """
         return self.__round_count
 
-    def get_dice_pool_len(self) -> int:
-        """Returns current length of the dice pool.
+    @property
+    def dice_pool(self) -> list[Dice]:
+        """Returns current dice pool.
 
-        :return: Length of the dice pool.
+        :return: List of dices in the dice pool.
         """
-        return len(self.__dice_pool)
+        return self.__dice_pool
 
     def shuffle_dice_pool(self) -> None:
         """Shuffle dices in the dice pool.
@@ -105,7 +107,7 @@ class Game:
     def __end_game(self) -> None:
         """End game. Show players score and congrats winner.
         """
-        print(Strings.end_game_players(stringify(self.__players), self.__winners[0].get_name()))
+        print(Strings.end_game_players(stringify(self.__players), self.__winners[0].name))
         input(Strings.end_game)
         clear_console()
         answer = bool_input(Strings.ask_continue)  # Ask if user wants to play again
@@ -131,14 +133,14 @@ class Game:
         for player in players:
             Turn(self, player)
             self.__create_dices()
-            if player.get_score() > self.__highest_score:
-                self.__highest_score = player.get_score()  # Update the highest score in the game
+            if player.score > self.__highest_score:
+                self.__highest_score = player.score  # Update the highest score in the game
 
         # Check if someone wins or if it's a draw
         self.__winners.clear()
         if self.__highest_score >= SCORE_LIMIT:
             for player in players:
-                if player.get_score() == self.__highest_score:
+                if player.score == self.__highest_score:
                     self.__winners.append(player)  # Save each player that reached the highest score
                     self.__state = _GameStates.DRAW
         if self.__winners and len(self.__winners) < 2:

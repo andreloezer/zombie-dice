@@ -23,26 +23,29 @@ class Player:
         """
         return Strings.display_player(self.__name, self.__score)
 
-    def get_name(self) -> str:
+    @property
+    def name(self) -> str:
         """Returns player name.
 
         :return: String of the player name.
         """
         return self.__name
 
-    def get_score(self) -> int:
+    @property
+    def score(self) -> int:
         """Returns player score.
 
         :return: Player score.
         """
         return self.__score
 
-    def add_to_score(self, score) -> None:
-        """Add to player score.
+    @score.setter
+    def score(self, score) -> None:
+        """Set player score.
 
-        :param score: Turn score to add to the player total score.
+        :param score: Player new score.
         """
-        self.__score += score
+        self.__score = score
 
     @staticmethod
     def __ask_name() -> str:
